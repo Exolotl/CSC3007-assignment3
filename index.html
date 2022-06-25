@@ -3,10 +3,11 @@
 <html class="has-background-black">
     <head>
         <meta charset = "UTF-8">
-        <title>Stuart's Info Visualization Assignment 2</title>
+        <title>Stuart's Info Visualization Assignment 3</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
         <style>
 
         </style>
@@ -16,7 +17,7 @@
             <div class="column">
                 <div class="box">
                     <h2 class="title is-2">
-                        Singapore Geo Map
+                        Singapore Population Map
                     </h2>
                     <div id="mapArea" style="border-style: solid">
                         <div class="tooltip"></div>
@@ -25,76 +26,6 @@
             </div>
         </section>
 
-        <script>
-
-            let width = 1200;
-            let height = 580;
-
-            //let margin = {top: 20, right: 20, bottom: 20, left: 20};
-            let margin = 20;
-
-            let map = d3.select("#mapArea")
-            .append("svg")
-            .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "0 0 " + width + " " + height);
-
-            Promise.all([d3.json("sgmap.json"), d3.csv("population2021.csv")])
-            .then(data => {
-
-                console.log(data[0]);
-                console.log(data[1]);
-
-                // Map and projection
-                var projection = d3.geoMercator()
-                    .center([103.851959, 1.290270])
-                    .fitExtent([[margin, margin], [width - margin, height-margin]], data[0]);
-
-                let geopath = d3.geoPath().projection(projection);
-
-                map.append("g")
-                    .attr("id", "districts")
-                    .selectAll("path")
-                    .data(data[0].features)
-                    .enter()
-                    .append("path")
-                    .attr("d", geopath)
-                    .attr("fill", "black");
-            })
-
-            // old code
-            // let projection = d3.geoEquirectangular();
-            // let geopath = d3.geoPath().projection(projection);
-
-            // d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-            // .then(data => {
-
-            //     // draw the map
-            //     map.append("g")
-            //         .attr("id", "countries")
-            //         .selectAll("path")
-            //         .data(data.features)
-            //         .enter()
-            //         .append("path")
-            //             .attr("d",  d => geopath(d))
-            //             .attr("fill", "#777")
-            //             .attr("stroke", "#fff")
-            //             .attr("stroke-width", 0.5)
-            //         .on("mouseover", (event, d) => {
-            //             d3.select(".tooltip")
-            //             .text(d.properties.name)
-            //             .style("position", "absolute")
-            //             .style("background", "#fff")
-            //             .style("left", (event.pageX) + "px")
-            //             .style("top", (event.pageY) + "px");
-            //         })
-            //         .on("mouseout", (event, d) => {
-            //             d3.select(".tooltip")
-            //             .text("");
-            //         })
-            // })
-
-                
-
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
