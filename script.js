@@ -93,7 +93,6 @@ Promise.all([d3.json("sgmap.json"), d3.csv("population2021.csv")])
 
     map.append("g")
         .attr("id", "districts")
-        .attr("class", "legend")
         .selectAll("path")
         .data(data[0].features)
         .enter()
