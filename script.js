@@ -52,6 +52,7 @@ Promise.all([d3.json("sgmap.json"), d3.csv("population2021.csv")])
     let mouseover = function(d) {
         // Tooltip
         tooltip
+            .style("display", "block")
             .style("opacity", 0.9);
         d3.select(this)
             .transition()
@@ -76,7 +77,8 @@ Promise.all([d3.json("sgmap.json"), d3.csv("population2021.csv")])
     // mouseleave events
     let mouseleave = function(d) {
         tooltip
-            .style("opacity", 0);
+            .style("opacity", 0)
+            .style("display", "none");
         d3.select(this)
             .transition()
             .style("stroke", "gray")
